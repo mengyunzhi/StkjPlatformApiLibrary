@@ -5,6 +5,9 @@ using Newtonsoft.Json;
 
 namespace Com.Lfshitong.Platform.Api.Entity
 {
+    /**
+     * 器具检定信息
+     * */
     class InstrumentCheckInfo
     {
         public static sbyte STATUS_HAVE_NOT_ACCEPTED = 0;            // 未受理

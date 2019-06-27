@@ -6,18 +6,29 @@ using Com.Lfshitong.Platform.Api.Service;
 
 namespace Com.Lfshitong.Platform.Api
 {
+    /**
+     * 入口类
+     * */
     public class Main
     {
+        // 配置信息
         private static Config _config;
-        public Main() {
+        private Main() {
         }
 
+        /**
+         * 设置配置信息
+         * config 配置
+         * */
         public static void Config(Config config) 
         {
             Main._config = config;
             HttpRequest.instanceByConfig(config);
         }
 
+        /**
+         * 获取当前配置
+         * */
         public static Config Config()
         {
             return Main._config;

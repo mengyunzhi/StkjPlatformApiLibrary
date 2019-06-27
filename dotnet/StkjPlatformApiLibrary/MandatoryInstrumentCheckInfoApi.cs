@@ -13,16 +13,16 @@ namespace Com.Lfshitong.Platform.Api
      * */
     public class MandatoryInstrumentCheckInfoApi
     {
+        /**
+         * 二级地址
+         * */
         private static string url = "/MandatoryInstrumentCheckInfo";
-        private HttpRequest httpRequest;
-        private MandatoryInstrumentCheckInfoApi(Config config)
-        {
-            this.httpRequest = HttpRequest.instanceByConfig(config);
-        }
 
         /**
+         * 
          * 退检
          * id 检定ID
+         * backedReason 退检原因
          * 
          **/
         public static HttpResponse<T> Back<T>(long id, String backedReason)
@@ -35,6 +35,12 @@ namespace Com.Lfshitong.Platform.Api
             return httpResponse;
         }
 
+        /**
+         * 不检
+         * id 检定ID
+         * backedReason 原因
+         * 
+         * */
         public static HttpResponse<T> NotNeedVerificated<T>(long id, String backedReason)
         {
             InstrumentCheckInfo instrumentCheckInfo = new InstrumentCheckInfo();

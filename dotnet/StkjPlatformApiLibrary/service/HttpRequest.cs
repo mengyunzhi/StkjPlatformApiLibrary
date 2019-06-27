@@ -11,14 +11,24 @@ using Com.Lfshitong.Platform.Api;
 
 namespace Com.Lfshitong.Platform.Api.Service
 {
+    /**
+     * http请求
+     * 封装了请求地址，用户名，密码，认证TOKEN
+     * 
+     * */
     class HttpRequest
     {
-        private string uri;
-        private string username;
-        private string password;
-        private string xAutoToken;
-        private bool authing = false;
-        private static HttpRequest instance;
+        private string uri;                         // 请求地址
+        private string username;                    // 用户名
+        private string password;                    // 密码
+        private string xAutoToken;                  // 认证TOKEN
+        private bool authing = false;               // 是否正在进行认证
+        private static HttpRequest instance;        // 单例
+
+        /**
+         * 获取单例
+         * 
+         * */
         public static HttpRequest getInstance()
         {
             if (instance == null)
@@ -28,13 +38,19 @@ namespace Com.Lfshitong.Platform.Api.Service
             return instance;
         }
 
+        /**
+         * 初始化单例
+         * config 配置信息
+         * 
+         * */
         public static HttpRequest instanceByConfig(Config config)
         {
             instance = new HttpRequest(config);
             return instance;
         }
-        
-        private  HttpRequest() {
+
+        private HttpRequest()
+        {
         }
 
         private HttpRequest(Config config)
@@ -44,7 +60,7 @@ namespace Com.Lfshitong.Platform.Api.Service
             this.uri = config.uri;
             Auth();
         }
-            
+
 
         // 认证
         public bool Auth()
@@ -54,7 +70,7 @@ namespace Com.Lfshitong.Platform.Api.Service
                 authing = false;
                 return false;
             }
-           
+
             authing = true;
             string authInfo = this.username + ":" + this.password;
             string encoded = Convert.ToBase64String(Encoding.Default.GetBytes(authInfo));
@@ -62,22 +78,20 @@ namespace Com.Lfshitong.Platform.Api.Service
             headers.Add("Authorization", "Basic " + encoded);
             HttpResponse<User> userResponse = this.Get<User>("/User/login", null, headers);
             authing = false;
-            if (userResponse.httpWebResponse.StatusCode.Equals(HttpStatusCode.OK)) {
+            if (userResponse.httpWebResponse.StatusCode.Equals(HttpStatusCode.OK))
+            {
                 this.xAutoToken = userResponse.httpWebResponse.Headers.Get("x-auth-token");
                 return true;
             }
             return false;
         }
 
-        protected String getAuthToken()
-        {
-            using (WebClient webClient = new WebClient())
-            {
-
-            }
-            return "";
-        }
-
+        /**
+         * get请求
+         * uri 地址
+         * param 参数
+         * 
+         * */
         public HttpResponse<T> Get<T>(String uri, Dictionary<String, Object> param)
         {
             WebHeaderCollection headers = new WebHeaderCollection();
@@ -98,7 +112,7 @@ namespace Com.Lfshitong.Platform.Api.Service
          * */
         protected HttpResponse<T> Get<T>(String uri, Dictionary<String, Object> param, WebHeaderCollection headers)
         {
-            String  requestUri = this.uri + uri + "?";
+            String requestUri = this.uri + uri + "?";
             if (param != null)
             {
                 foreach (KeyValuePair<String, Object> entry in param)
@@ -111,10 +125,11 @@ namespace Com.Lfshitong.Platform.Api.Service
             WebRequest request = WebRequest.Create(requestUri);
             request.Method = "GET";
             request.ContentType = "application/json; charset=utf-8";
-            if (headers != null) {
+            if (headers != null)
+            {
                 request.Headers = headers;
             }
-          
+
 
             String resultString = String.Empty;
             HttpWebResponse response;
@@ -129,15 +144,24 @@ namespace Com.Lfshitong.Platform.Api.Service
                     dataStream.Close();
                 }
             }
-            catch (WebException exp) {
+            catch (WebException exp)
+            {
                 response = (HttpWebResponse)exp.Response;
             }
 
             return new HttpResponse<T>(response, resultString);
         }
 
-        public HttpResponse<T> Put<T>(String uri, Object data) {
-           
+        /**
+         * 
+        * Put 请求
+        * uri 地址
+        * data 请求数据
+        * 
+        * */
+        public HttpResponse<T> Put<T>(String uri, Object data)
+        {
+
             string requestUri = this.uri + uri;
             WebHeaderCollection headers = new WebHeaderCollection();
             headers.Set("x-auth-token", this.xAutoToken);
@@ -146,12 +170,12 @@ namespace Com.Lfshitong.Platform.Api.Service
             request.Method = "PUT";
             request.Headers = headers;
             request.ContentType = "application/json";
-        
+
             WriteStream(data, request);
 
-           
+
             String resultString = String.Empty;
-     
+
             HttpWebResponse response;
             try
             {
@@ -172,13 +196,20 @@ namespace Com.Lfshitong.Platform.Api.Service
                 {
                     return this.Put<T>(uri, data);
                 }
-                else {
+                else
+                {
                     return new HttpResponse<T>(response);
                 }
             }
             return new HttpResponse<T>(response, resultString);
         }
 
+        /**
+         * 写入数据流
+         * obj 写入的数据
+         * httpRequest http请求
+         * 
+         * */
         internal void WriteStream(object obj, HttpWebRequest httpRequest)
         {
             if (obj != null)
@@ -187,7 +218,8 @@ namespace Com.Lfshitong.Platform.Api.Service
                 {
                     if (obj is string)
                         streamWriter.Write(obj);
-                    else {
+                    else
+                    {
                         String jsonString = JsonConvert.SerializeObject(obj);
                         streamWriter.Write(jsonString);
                     }

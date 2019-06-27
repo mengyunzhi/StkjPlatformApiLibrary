@@ -7,19 +7,28 @@ using System.IO;
 
 namespace Com.Lfshitong.Platform.Api.Entity
 {
+    /**
+     * http响应
+     * 
+     * */
     public class HttpResponse<T>
     {
-        public HttpWebResponse httpWebResponse { get; private set; }
-        public T body { get; private set; }
-        private HttpResponse() { }
-        public long timestamp {get; set;}
-        public short status {get; set;}
-        public string error {get; set;}
-        public string message {get; set;}
-        public string path {get; set;}
-        public string url { get; set; }
-        public string method { get; set; }
+        public HttpWebResponse httpWebResponse { get; private set; }    // 原生响应
+        public T body { get; private set; }                             // 返回主体
+        public long timestamp {get; set;}                               // 时间戳
+        public short status {get; set;}                                 // 状态码
+        public string error {get; set;}                                 // 错误
+        public string message {get; set;}                               // 信息
+        public string path {get; set;}                                  // 请求路径
+        public string url { get; set; }                                 // 请求路径
+        public string method { get; set; }                              // 请求方法
 
+        private HttpResponse() { }     
+ 
+        /**
+         * 构造函数
+         * response 原生的http响应
+         * */
         public HttpResponse(HttpWebResponse response)
         {
             this.status = (short)response.StatusCode;
@@ -40,6 +49,11 @@ namespace Com.Lfshitong.Platform.Api.Entity
             this.method = me.method;
         }
 
+        /**
+         * 构造函数
+         * httpWebResponse 原生的http响应
+         * responseString 返回的字符串
+         * */
         public HttpResponse(HttpWebResponse httpWebResponse, string responseString) 
         {
             this.httpWebResponse = httpWebResponse;
