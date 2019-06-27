@@ -13,7 +13,7 @@ namespace UnitTest
     ///包含所有 MandatoryInstrumentCheckInfoApiTest 单元测试
     ///</summary>
     [TestClass()]
-    public class MandatoryInstrumentCheckInfoApiTest
+    public class MandatoryInstrumentCheckInfoApiTest : MainTest
     {
 
 
@@ -72,14 +72,13 @@ namespace UnitTest
         [TestMethod()]
         public void uploadByTechnicalInstitutionTest()
         {
-            Main.setConfig(new Config("http://47.95.200.109:81/api-cs", "bzjl", "123456"));
-            long id = 6472; // TODO: 初始化为适当的值
+            Main.setConfig(this.config);
+            long id = 5703; // TODO: 初始化为适当的值
             InstrumentCheckInfo instrumentCheckInfo = new InstrumentCheckInfo(id); 
           
-            HttpStatusCode actual;
-            actual = MandatoryInstrumentCheckInfoApi.uploadByTechnicalInstitution(id, instrumentCheckInfo);
-            Assert.AreEqual(actual, HttpStatusCode.OK);
-            Assert.Inconclusive("验证此测试方法的正确性。");
+            HttpResponse<object> actual;
+            actual = MandatoryInstrumentCheckInfoApi.back<object>(id, "测试原因");
+            Assert.AreEqual(actual.status, 200);
         }
     }
 }

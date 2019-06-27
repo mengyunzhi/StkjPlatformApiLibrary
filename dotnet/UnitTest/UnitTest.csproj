@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HttpServiceTest.cs" />
+    <Compile Include="MainTest.cs" />
     <Compile Include="MandatoryInstrumentCheckInfoApiTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

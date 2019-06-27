@@ -14,17 +14,36 @@ namespace StkjApiLibrary
     class MandatoryInstrumentCheckInfoApi
     {
         private static string url = "/MandatoryInstrumentCheckInfo";
-        private HttpService httpService;
+        private HttpRequest httpRequest;
         private MandatoryInstrumentCheckInfoApi(Config config)
         {
-            this.httpService = new HttpService(Main.getConfig());
+            this.httpRequest = new HttpRequest(Main.getConfig());
         }
 
-        public static HttpStatusCode uploadByTechnicalInstitution(long id, InstrumentCheckInfo instrumentCheckInfo)
+        /**
+         * 退检
+         * id 检定ID
+         * 
+         **/
+        public static HttpResponse<T> back<T>(long id, String backedReason)
         {
-            HttpService httpServer = new HttpService();
-            HttpResponse<object> httpResponse = httpServer.put<object>(MandatoryInstrumentCheckInfoApi.url + "/uploadByTechnicalInstitution/" + id.ToString(), instrumentCheckInfo);
-            return httpResponse.httpWebResponse.StatusCode;
+            InstrumentCheckInfo instrumentCheckInfo = new InstrumentCheckInfo();
+            instrumentCheckInfo.backedReason = backedReason;
+            instrumentCheckInfo.acceptedStatus = InstrumentCheckInfo.STATUS_BACKED;
+            HttpRequest httpRequest = new HttpRequest();
+            HttpResponse<T> httpResponse = httpRequest.put<T>(MandatoryInstrumentCheckInfoApi.url + "/uploadByTechnicalInstitution/" + id.ToString(), instrumentCheckInfo);
+            return httpResponse;
         }
+
+        public static HttpResponse<T> notNeedVerificated<T>(long id, String backedReason)
+        {
+            InstrumentCheckInfo instrumentCheckInfo = new InstrumentCheckInfo();
+            instrumentCheckInfo.backedReason = backedReason;
+            instrumentCheckInfo.acceptedStatus = InstrumentCheckInfo.STATUS_DO_NOT_NEED_CHECKED;
+            HttpRequest httpRequest = new HttpRequest();
+            HttpResponse<T> httpResponse = httpRequest.put<T>(MandatoryInstrumentCheckInfoApi.url + "/uploadByTechnicalInstitution/" + id.ToString(), instrumentCheckInfo);
+            return httpResponse;
+        }
+
     }
 }

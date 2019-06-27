@@ -71,7 +71,7 @@ namespace UnitTest
         ///</summary>
         public void getTestHelper<T>()
         {
-            HttpService target = new HttpService(new Config("http://47.95.200.109/api-cs", "admin", "shitong")); // TODO: 初始化为适当的值
+            HttpRequest target = new HttpRequest(new Config("http://47.95.200.109/api-cs", "admin", "shitong")); // TODO: 初始化为适当的值
             string uri = string.Empty; // TODO: 初始化为适当的值
             Dictionary<string, object> param = null; // TODO: 初始化为适当的值
 
@@ -92,7 +92,7 @@ namespace UnitTest
         ///</summary>
         public void authTest()
         {
-            HttpService target = new HttpService(new Config("http://47.95.200.109:81/api-cs", "bzjl", "123456")); // TODO: 初始化为适当的值
+            HttpRequest target = new HttpRequest(new Config("http://47.95.200.109:81/api-cs", "bzjl", "123456")); // TODO: 初始化为适当的值
             bool result = target.auth();
             Assert.AreEqual(result, true);
         }
