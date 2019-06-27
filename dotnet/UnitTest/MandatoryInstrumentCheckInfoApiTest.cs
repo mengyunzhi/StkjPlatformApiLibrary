@@ -1,8 +1,7 @@
-﻿using StkjApiLibrary;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using StkjApiLibrary.entity;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Com.Lfshitong.Platform.Api.Entity;
 using System.Net;
-using StkjPlatformApi;
+using Com.Lfshitong.Platform.Api;
 
 namespace UnitTest
 {
@@ -72,12 +71,12 @@ namespace UnitTest
         [TestMethod()]
         public void uploadByTechnicalInstitutionTest()
         {
-            Main.setConfig(this.config);
+            Main.Config(this.config);
             long id = 5703; // TODO: 初始化为适当的值
             InstrumentCheckInfo instrumentCheckInfo = new InstrumentCheckInfo(id); 
           
             HttpResponse<object> actual;
-            actual = MandatoryInstrumentCheckInfoApi.back<object>(id, "测试原因");
+            actual = MandatoryInstrumentCheckInfoApi.Back<object>(id, "测试原因");
             Assert.AreEqual(actual.status, 200);
         }
     }

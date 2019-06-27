@@ -1,8 +1,8 @@
-﻿using StkjApiLibrary.service;
-using StkjApiLibrary;
+﻿using Com.Lfshitong.Platform.Api.Service;
+using Com.Lfshitong.Platform.Api;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using StkjApiLibrary.entity;
+using Com.Lfshitong.Platform.Api.Entity;
 using System.Net;
 namespace UnitTest
 {
@@ -71,12 +71,12 @@ namespace UnitTest
         ///</summary>
         public void getTestHelper<T>()
         {
-            HttpRequest target = new HttpRequest(new Config("http://47.95.200.109/api-cs", "admin", "shitong")); // TODO: 初始化为适当的值
+            HttpRequest target = HttpRequest.getInstance(); // TODO: 初始化为适当的值
             string uri = string.Empty; // TODO: 初始化为适当的值
             Dictionary<string, object> param = null; // TODO: 初始化为适当的值
 
 
-            HttpResponse<object> xxx = target.get<object>("/User/login", param);
+            HttpResponse<object> xxx = target.Get<object>("/User/login", param);
             Assert.AreEqual(xxx.httpWebResponse.StatusCode, HttpStatusCode.OK);
         }
 
@@ -92,8 +92,8 @@ namespace UnitTest
         ///</summary>
         public void authTest()
         {
-            HttpRequest target = new HttpRequest(new Config("http://47.95.200.109:81/api-cs", "bzjl", "123456")); // TODO: 初始化为适当的值
-            bool result = target.auth();
+            HttpRequest target = HttpRequest.getInstance(); // TODO: 初始化为适当的值
+            bool result = target.Auth();
             Assert.AreEqual(result, true);
         }
     }

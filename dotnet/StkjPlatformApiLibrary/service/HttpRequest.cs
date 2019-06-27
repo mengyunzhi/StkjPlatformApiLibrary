@@ -5,11 +5,11 @@ using System.Net;
 using System.Collections;
 using System.IO;
 using Newtonsoft.Json;
-using StkjApiLibrary.entity;
+using Com.Lfshitong.Platform.Api.Entity;
 using System.Net.Mime;
-using StkjPlatformApi;
+using Com.Lfshitong.Platform.Api;
 
-namespace StkjApiLibrary.service
+namespace Com.Lfshitong.Platform.Api.Service
 {
     class HttpRequest
     {
@@ -18,23 +18,36 @@ namespace StkjApiLibrary.service
         private string password;
         private string xAutoToken;
         private bool authing = false;
-
-        public  HttpRequest() {
-            this.username = Main.getConfig().username;
-            this.password = Main.getConfig().password;
-            this.uri = Main.getConfig().uri;
+        private static HttpRequest instance;
+        public static HttpRequest getInstance()
+        {
+            if (instance == null)
+            {
+                instance = new HttpRequest(Main.Config());
+            }
+            return instance;
         }
 
-        public HttpRequest(Config config)
+        public static HttpRequest instanceByConfig(Config config)
+        {
+            instance = new HttpRequest(config);
+            return instance;
+        }
+        
+        private  HttpRequest() {
+        }
+
+        private HttpRequest(Config config)
         {
             this.username = config.username;
             this.password = config.password;
             this.uri = config.uri;
+            Auth();
         }
             
 
         // 认证
-        public bool auth()
+        public bool Auth()
         {
             if (authing)
             {
@@ -47,7 +60,7 @@ namespace StkjApiLibrary.service
             string encoded = Convert.ToBase64String(Encoding.Default.GetBytes(authInfo));
             WebHeaderCollection headers = new WebHeaderCollection();
             headers.Add("Authorization", "Basic " + encoded);
-            HttpResponse<User> userResponse = this.get<User>("/User/login", null, headers);
+            HttpResponse<User> userResponse = this.Get<User>("/User/login", null, headers);
             authing = false;
             if (userResponse.httpWebResponse.StatusCode.Equals(HttpStatusCode.OK)) {
                 this.xAutoToken = userResponse.httpWebResponse.Headers.Get("x-auth-token");
@@ -65,15 +78,15 @@ namespace StkjApiLibrary.service
             return "";
         }
 
-        public HttpResponse<T> get<T>(String uri, Dictionary<String, Object> param)
+        public HttpResponse<T> Get<T>(String uri, Dictionary<String, Object> param)
         {
             WebHeaderCollection headers = new WebHeaderCollection();
             headers.Add("x-auth-token", this.xAutoToken);
-            HttpResponse<T> response = this.get<T>(uri, param, headers);
-            if (response.httpWebResponse.StatusCode.Equals(HttpStatusCode.Unauthorized) && auth())
+            HttpResponse<T> response = this.Get<T>(uri, param, headers);
+            if (response.httpWebResponse.StatusCode.Equals(HttpStatusCode.Unauthorized) && Auth())
             {
                 headers.Set("x-auth-token", this.xAutoToken);
-                return this.get<T>(uri, param, headers);
+                return this.Get<T>(uri, param, headers);
             }
             return response;
         }
@@ -83,7 +96,7 @@ namespace StkjApiLibrary.service
          *  uri: 请求相对路径
          *  param：请求参数
          * */
-        protected HttpResponse<T> get<T>(String uri, Dictionary<String, Object> param, WebHeaderCollection headers)
+        protected HttpResponse<T> Get<T>(String uri, Dictionary<String, Object> param, WebHeaderCollection headers)
         {
             String  requestUri = this.uri + uri + "?";
             if (param != null)
@@ -123,7 +136,7 @@ namespace StkjApiLibrary.service
             return new HttpResponse<T>(response, resultString);
         }
 
-        public HttpResponse<T> put<T>(String uri, Object data) {
+        public HttpResponse<T> Put<T>(String uri, Object data) {
            
             string requestUri = this.uri + uri;
             WebHeaderCollection headers = new WebHeaderCollection();
@@ -155,9 +168,9 @@ namespace StkjApiLibrary.service
             catch (WebException exp)
             {
                 response = (HttpWebResponse)exp.Response;
-                if (response.StatusCode.Equals(HttpStatusCode.Unauthorized) && auth())
+                if (response.StatusCode.Equals(HttpStatusCode.Unauthorized) && Auth())
                 {
-                    return this.put<T>(uri, data);
+                    return this.Put<T>(uri, data);
                 }
                 else {
                     return new HttpResponse<T>(response);

@@ -1,24 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using StkjApiLibrary;
+using Com.Lfshitong.Platform.Api;
+using Com.Lfshitong.Platform.Api.Service;
 
-namespace StkjPlatformApi
+namespace Com.Lfshitong.Platform.Api
 {
     public class Main
     {
-        public static Config config;
+        private static Config _config;
         public Main() {
         }
 
-        public static void setConfig(Config config) 
+        public static void Config(Config config) 
         {
-            Main.config = config;
+            Main._config = config;
+            HttpRequest.instanceByConfig(config);
         }
 
-        public static Config getConfig()
+        public static Config Config()
         {
-            return Main.config;
+            return Main._config;
         }
     }
 }

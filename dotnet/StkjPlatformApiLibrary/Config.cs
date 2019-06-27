@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace StkjApiLibrary
+namespace Com.Lfshitong.Platform.Api
 {
     public class Config
     {

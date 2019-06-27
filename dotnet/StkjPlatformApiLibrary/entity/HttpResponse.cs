@@ -5,9 +5,9 @@ using System.Net;
 using Newtonsoft.Json;
 using System.IO;
 
-namespace StkjApiLibrary.entity
+namespace Com.Lfshitong.Platform.Api.Entity
 {
-    class HttpResponse<T>
+    public class HttpResponse<T>
     {
         public HttpWebResponse httpWebResponse { get; private set; }
         public T body { get; private set; }

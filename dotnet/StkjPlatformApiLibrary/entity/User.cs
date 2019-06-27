@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace StkjApiLibrary.entity
+namespace Com.Lfshitong.Platform.Api.Entity
 {
     class User
     {
