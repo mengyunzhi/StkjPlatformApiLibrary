@@ -16,6 +16,11 @@ namespace Com.Lfshitong.Platform.Api
         private Main() {
         }
 
+        public static void Config(string url, string username, string password)
+        { 
+            Main.Config(new Config(url, username, password);
+        }
+
         /**
          * 设置配置信息
          * config 配置
