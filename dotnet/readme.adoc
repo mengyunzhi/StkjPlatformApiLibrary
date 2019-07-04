@@ -26,6 +26,8 @@ TIP: 适用对象: 第三方计量软件技术人员。适用环境：.net 2.0
 例：
 ```c#
 using Com.Lfshitong.Platform.Api;
+using Com.Lfshitong.Platform.Api.Entity;
+
 
 bool status = Main.Config("认证地址", "用户名", "密码"); 	 // 保障此行代码在调用其它接口前，此代码只需要运行1次。
 if (status)
@@ -60,7 +62,7 @@ Assert.AreEqual(result.status, 200);
 == 不检接口
 `MandatoryInstrumentCheckInfoApi.NotNeedVerificated<T>(long id, string reason);`
 
-.参考
+.参数
 |===
 |名称 		| 描述
 | id 		| 检定ID
@@ -75,6 +77,57 @@ using Com.Lfshitong.Platform.Api;
 HttpResponse<object> result = MandatoryInstrumentCheckInfoApi.NotNeedVerificated<object>(5703, "不检原因");
 Assert.AreEqual(result.status, 200);
 ```
+
+== 批量退检接口
+`HttpResponse<T>  MandatoryInstrumentCheckInfoApi.BatchBack<T>(List<long> ids, string reason)`
+.参考
+|===
+|名称         | 描述
+| ids        | 批量退检的 检定ID数组
+| reason    | 退检理由(不超过255个字符)
+|===
+
+未例代码：
+```c#
+using Com.Lfshitong.Platform.Api.Entity;
+using Com.Lfshitong.Platform.Api;
+
+        public void BatchBackTest() {
+            List<long> instrumentCheckInfos = new List<long>();
+            instrumentCheckInfos.Add(5703);
+            instrumentCheckInfos.Add(5704);
+            HttpResponse<object> result = MandatoryInstrumentCheckInfoApi.BatchBack<object>(instrumentCheckInfos, "这里写退回原因");
+            Assert.AreEqual(result.status, 200);
+        }
+```
+
+== 批量不检接口
+`HttpResponse<T>  MandatoryInstrumentCheckInfoApi.BatchNotNeedVerificated<T>(List<long> ids, string reason)`
+.参考
+|===
+|名称         | 描述
+| ids        | 批量不检的检定ID数组
+| reason    | 不检理由(不超过255个字符)
+|===
+
+
+
+示例代码:
+```c#
+using Com.Lfshitong.Platform.Api.Entity;
+using Com.Lfshitong.Platform.Api;
+
+        [TestMethod]
+        public void BatchNotNeedVerificatedTest()
+        {
+            List<long> instrumentCheckInfos = new List<long>();
+            instrumentCheckInfos.Add(5705);
+            instrumentCheckInfos.Add(5706);
+            HttpResponse<object> result = MandatoryInstrumentCheckInfoApi.BatchNotNeedVerificated<object>(instrumentCheckInfos, "这里写不检原因");
+            Assert.AreEqual(result.status, 200);
+        }
+```
+
 
 = 实体
 
