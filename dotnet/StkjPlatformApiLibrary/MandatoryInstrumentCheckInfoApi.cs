@@ -51,5 +51,44 @@ namespace Com.Lfshitong.Platform.Api
             return httpResponse;
         }
 
+        /**
+         * 批量退检
+         * ids 检定记录ID
+         * reason 退检原因
+         * */
+        public static HttpResponse<T> BatchBack<T>(List<long> ids, string reason)
+        {
+            return batchUpload<T>(ids, reason, InstrumentCheckInfo.STATUS_BACKED);
+        }
+
+        /**
+         * 批量不检
+         * ids 检定记录ID
+         * reason 原因
+         * 
+         * */
+        internal static HttpResponse<T> BatchNotNeedVerificated<T>(List<long> ids, string reason)
+        {
+            return batchUpload<T>(ids, reason, InstrumentCheckInfo.STATUS_DO_NOT_NEED_CHECKED);
+        }
+
+        /**
+         * 批量上传检定结果
+         * ids 检定记录ID
+         * reason 原因
+         * status 检定状态
+         * 
+         * */
+        private static HttpResponse<T> batchUpload<T>(List<long> ids, string reason, sbyte status)
+        {
+            List<InstrumentCheckInfo> instrumentCheckInfos = new List<InstrumentCheckInfo>();
+            foreach (long id in ids)
+            {
+                instrumentCheckInfos.Add(new InstrumentCheckInfo(id, reason, status));
+            }
+
+            HttpRequest httpRequest = HttpRequest.getInstance();
+            return httpRequest.Put<T>(MandatoryInstrumentCheckInfoApi.url + "/batchUpload", instrumentCheckInfos);
+        }
     }
 }

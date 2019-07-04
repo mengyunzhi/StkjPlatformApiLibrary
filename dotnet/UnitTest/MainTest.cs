@@ -12,7 +12,8 @@ namespace UnitTest
         protected Config config;
         public MainTest()
         {
-            this.config = new Config("http://47.95.200.109:81/api-cs/", "bzjl", "123456");
+            this.config = new Config("http://192.160.1.101:8010/api-cs/", "bzjl", "111111");
+            Main.Config(this.config);
         }
     }
 }
