@@ -1,0 +1,92 @@
+:url: http://47.95.200.109:81
+:prefix: /api-cs
+:host: 47.95.200.109:81/api-cs
+:size: 20
+
+= 计量管理平台接口文档V1.0
+廊坊开发区世通科技有限公司
+:toc: left
+
+TIP: 适用对象: 第三方计量软件技术人员。适用环境：.net 2.0
+
+= 写在前面
+在开发过程中，请使用测试服务器，地址为：`{url}`。
+
+技术机构的账号由系统管理员统一注册，请在QQ群中获取测试账号信息。
+
+所有的响应状态均以状态码的形式返回，状态码的定义参考 https://zh.wikipedia.org/wiki/HTTP%E7%8A%B6%E6%80%81%E7%A0%81[维基百科]
+
+技术机构一旦正式开通API接口权限，技术机构回传相关数据则只能通过API接口进行。
+
+接口有一定的频率限制，触发频率限制阀值后（每分钟120次）将暂时停止访问，请避免短时间对平台发起大量的请求。有特殊需求的，请单独联系我们。
+
+= 接口列表
+重复调用认证接口，可能会触发后台的频率限制。在使用此接口中，只需要保证在调用其它的数据交互接口前进行了认证配置即可。
+
+例：
+```c#
+using Com.Lfshitong.Platform.Api;
+
+bool status = Main.Config("认证地址", "用户名", "密码"); 	 // 保障此行代码在调用其它接口前，此代码只需要运行1次。
+if (status)
+{
+    System.Console.WriteLine("认证成功");
+}
+else {
+    System.Console.WriteLine("认证失败");
+}
+
+```
+
+== 退检接口
+`MandatoryInstrumentCheckInfoApi.Back<T>(long id, string reason);`
+
+.参考
+|===
+|名称 		| 描述
+| id 		| 检定ID
+| reason 	| 退检理由(不超过255个字符)
+|===
+
+示例代码
+```c#
+            HttpResponse<object> result = MandatoryInstrumentCheckInfoApi.Back<object>(5703, "退检原因");
+            Assert.AreEqual(result.status, 200);
+```
+
+== 不检接口
+`MandatoryInstrumentCheckInfoApi.NotNeedVerificated<T>(long id, string reason);`
+
+.参考
+|===
+|名称 		| 描述
+| id 		| 检定ID
+| reason 	| 不检理由(不超过255个字符)
+|===
+
+```示例代码
+            HttpResponse<object> result = MandatoryInstrumentCheckInfoApi.NotNeedVerificated<object>(5703, "不检原因");
+            Assert.AreEqual(result.status, 200);
+```
+
+= 实体
+
+== HttpResponse
+HTTP响应信息
+```c#
+    public class HttpResponse<T>
+    {
+        public HttpWebResponse httpWebResponse { get; private set; }    // 原生响应
+        public T body { get; private set; }                             // 返回主体
+        public long timestamp {get; set;}                               // 时间戳
+        public short status {get; set;}                                 // 状态码
+        public string error {get; set;}                                 // 错误
+        public string message {get; set;}                               // 信息
+        public string path {get; set;}                                  // 请求路径
+        public string url { get; set; }                                 // 请求路径
+        public string method { get; set; }                              // 请求方法
+
+```
+
+
+
