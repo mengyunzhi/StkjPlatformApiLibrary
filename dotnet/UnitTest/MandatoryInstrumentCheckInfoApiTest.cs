@@ -2,6 +2,7 @@
 using Com.Lfshitong.Platform.Api.Entity;
 using System.Net;
 using Com.Lfshitong.Platform.Api;
+using System.Collections.Generic;
 
 namespace UnitTest
 {
@@ -71,16 +72,7 @@ namespace UnitTest
         [TestMethod()]
         public void uploadByTechnicalInstitutionTest()
         {
-            bool status = Main.Config(this.config);
-            if (status)
-            {
-                System.Console.WriteLine("认证成功");
-            }
-            else
-            {
-                System.Console.WriteLine("认证失败");
-            }
-            long id = 5703; // TODO: 初始化为适当的值
+            long id = 5703; // 检定ID
             InstrumentCheckInfo instrumentCheckInfo = new InstrumentCheckInfo(id); 
           
             HttpResponse<object> result;
@@ -88,6 +80,31 @@ namespace UnitTest
             Assert.AreEqual(result.status, 200);
 
             result = MandatoryInstrumentCheckInfoApi.NotNeedVerificated<object>(id, "测试原因");
+            Assert.AreEqual(result.status, 200);
+        }
+
+        /**
+         * 批量退检
+         * */
+        [TestMethod]
+        public void BatchBackTest() {
+            List<long> instrumentCheckInfos = new List<long>();
+            instrumentCheckInfos.Add(5703);
+            instrumentCheckInfos.Add(5704);
+            HttpResponse<object> result = MandatoryInstrumentCheckInfoApi.BatchBack<object>(instrumentCheckInfos, "这里写退回原因");
+            Assert.AreEqual(result.status, 200);
+        }
+
+        /**
+         * 批量不检
+         * */
+        [TestMethod]
+        public void BatchNotNeedVerificatedTest()
+        {
+            List<long> instrumentCheckInfos = new List<long>();
+            instrumentCheckInfos.Add(5705);
+            instrumentCheckInfos.Add(5706);
+            HttpResponse<object> result = MandatoryInstrumentCheckInfoApi.BatchNotNeedVerificated<object>(instrumentCheckInfos, "这里写不检原因");
             Assert.AreEqual(result.status, 200);
         }
     }

@@ -69,5 +69,12 @@ namespace Com.Lfshitong.Platform.Api.Entity
             this.id = id;
         }
 
+        public InstrumentCheckInfo(long id, string backedReason, sbyte status)
+        {
+            this.id = id;
+            this.backedReason = backedReason;
+            this.acceptedStatus = status;
+        }
+
     }
 }

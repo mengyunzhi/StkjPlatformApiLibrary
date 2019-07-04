@@ -18,7 +18,7 @@ namespace Com.Lfshitong.Platform.Api
 
         public static bool Config(string url, string username, string password)
         { 
-            return Main.Config(new Config(url, username, password);
+            return Main.Config(new Config(url, username, password));
         }
 
         /**
