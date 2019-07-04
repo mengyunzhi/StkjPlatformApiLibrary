@@ -50,8 +50,11 @@ else {
 
 示例代码
 ```c#
-            HttpResponse<object> result = MandatoryInstrumentCheckInfoApi.Back<object>(5703, "退检原因");
-            Assert.AreEqual(result.status, 200);
+using Com.Lfshitong.Platform.Api.Entity;
+using Com.Lfshitong.Platform.Api;
+
+HttpResponse<object> result = MandatoryInstrumentCheckInfoApi.Back<object>(5703, "退检原因");
+Assert.AreEqual(result.status, 200);
 ```
 
 == 不检接口
@@ -64,9 +67,13 @@ else {
 | reason 	| 不检理由(不超过255个字符)
 |===
 
-```示例代码
-            HttpResponse<object> result = MandatoryInstrumentCheckInfoApi.NotNeedVerificated<object>(5703, "不检原因");
-            Assert.AreEqual(result.status, 200);
+示例代码
+```c#
+using Com.Lfshitong.Platform.Api.Entity;
+using Com.Lfshitong.Platform.Api;
+
+HttpResponse<object> result = MandatoryInstrumentCheckInfoApi.NotNeedVerificated<object>(5703, "不检原因");
+Assert.AreEqual(result.status, 200);
 ```
 
 = 实体
@@ -85,6 +92,7 @@ HTTP响应信息
         public string path {get; set;}                                  // 请求路径
         public string url { get; set; }                                 // 请求路径
         public string method { get; set; }                              // 请求方法
+    }
 
 ```
 
