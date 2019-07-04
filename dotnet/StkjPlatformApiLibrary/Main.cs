@@ -16,19 +16,20 @@ namespace Com.Lfshitong.Platform.Api
         private Main() {
         }
 
-        public static void Config(string url, string username, string password)
+        public static bool Config(string url, string username, string password)
         { 
-            Main.Config(new Config(url, username, password);
+            return Main.Config(new Config(url, username, password);
         }
 
         /**
          * 设置配置信息
          * config 配置
          * */
-        public static void Config(Config config) 
+        public static bool Config(Config config) 
         {
             Main._config = config;
-            HttpRequest.instanceByConfig(config);
+            HttpRequest httpRequest = HttpRequest.instanceByConfig(config);
+            return httpRequest.login;
         }
 
         /**

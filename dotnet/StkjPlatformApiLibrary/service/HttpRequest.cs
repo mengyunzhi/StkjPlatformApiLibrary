@@ -23,6 +23,7 @@ namespace Com.Lfshitong.Platform.Api.Service
         private string password;                    // 密码
         private string xAutoToken;                  // 认证TOKEN
         private bool authing = false;               // 是否正在进行认证
+        public bool login = false;                  // 是否已登录
         private static HttpRequest instance;        // 单例
 
         /**
@@ -58,7 +59,7 @@ namespace Com.Lfshitong.Platform.Api.Service
             this.username = config.username;
             this.password = config.password;
             this.uri = config.uri;
-            Auth();
+            this.login = Auth();
         }
 
 

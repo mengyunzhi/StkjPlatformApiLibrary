@@ -71,13 +71,24 @@ namespace UnitTest
         [TestMethod()]
         public void uploadByTechnicalInstitutionTest()
         {
-            Main.Config(this.config);
+            bool status = Main.Config(this.config);
+            if (status)
+            {
+                System.Console.WriteLine("认证成功");
+            }
+            else
+            {
+                System.Console.WriteLine("认证失败");
+            }
             long id = 5703; // TODO: 初始化为适当的值
             InstrumentCheckInfo instrumentCheckInfo = new InstrumentCheckInfo(id); 
           
-            HttpResponse<object> actual;
-            actual = MandatoryInstrumentCheckInfoApi.Back<object>(id, "测试原因");
-            Assert.AreEqual(actual.status, 200);
+            HttpResponse<object> result;
+            result = MandatoryInstrumentCheckInfoApi.Back<object>(id, "测试原因");
+            Assert.AreEqual(result.status, 200);
+
+            result = MandatoryInstrumentCheckInfoApi.NotNeedVerificated<object>(id, "测试原因");
+            Assert.AreEqual(result.status, 200);
         }
     }
 }
