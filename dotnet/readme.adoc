@@ -30,6 +30,7 @@ using Com.Lfshitong.Platform.Api.Entity;
 
 
 bool status = Main.Config("认证地址", "用户名", "密码"); 	 // 保障此行代码在调用其它接口前，此代码只需要运行1次。
+// 例：bool status = Main.Config("http://47.95.200.109:81/api-cs/", "shitong", "lfst");
 if (status)
 {
     System.Console.WriteLine("认证成功");
