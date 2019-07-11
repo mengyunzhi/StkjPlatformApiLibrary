@@ -1,0 +1,26 @@
+世通科技平台接口
+
+## http请求接口文档
+http接口，采用`base auth`以及`x-auth-token`认证模式，link:http/readme.adoc[点击查阅]。
+
+## dotnet(.net 2.0+)
+dotnet接口是对http接口的封装，使用在dotnet环境下进行调用，link:dotnet/readme.adoc[点击查阅]。
+
+
+## 其它规范
+
+### 条形码
+条码生成采用`code128（auto)`。
+
+条形码生成规则为：`ST-<标识号>-<数据>`
+比如：id为1345的强检器具检定申请，将表示为表示为:`ST-0-1235`
+
+.标识号
+|===
+| 标识号 | 说明 | 备注
+| 0 | 强检器具检定申请 | 用于强检器具检定申请单
+|===
+
+
+[NOTE]
+本文档采用asciidoctor构建
