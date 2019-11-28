@@ -1251,6 +1251,42 @@ HTTP/1.1 200 OK
 }
 ```
 
+=== 获取所有的强检器具类别接口
+`GET /instrumentType`
+
+.参数
+|===
+| 请求类型 | 名称 |  描述 | 类型
+|===
+
+
+.示例请求
+```
+GET /instrumentType?x-auth-token=30da72f1-62c4-4ca0-9d8f-706b6f8fc8c2
+```
+
+.示例响应Array<InsturmentType 强检器具类别>
+```
+HTTP/1.1 200 OK
+[
+    {
+        "id": 1,
+        "name": "压力表",
+        "pinyin": "yalibiao",
+        "code": "025001",
+        "codeName": "压力表",
+    },
+    {
+        "id": 3,
+        "name": "钢卷尺",
+        "pinyin": "gangjuanchi",
+        "code": "001003",
+        "codeName": "钢卷尺"
+    }
+]
+```
+
+
 == 实体与字段
 所有Calendar类型的返回值，均为时间戳。
 
@@ -1317,6 +1353,17 @@ HTTP/1.1 200 OK
 | remarks| 备注 | string
 | validityDate | 有效期至 | string(date)
 |===
+
+=== InsturmentType 强检器具类别
+|===
+| 字段名 | 描述 | 类型
+| id | 主键 | int64
+| name | 名称 | string
+| pinyin | 拼音 | string
+| code | 对应国家平台编码 | string
+| codeName | 对应国家平台名称 | string
+|===
+
 
 === MandatoryInstrumentCheckApply强检器具检定申请
 |===
