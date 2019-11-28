@@ -1266,7 +1266,7 @@ GET /instrumentType HTTP/1.1
 x-auth-token: 30da72f1-62c4-4ca0-9d8f-706b6f8fc8c2
 ```
 
-.示例响应Array<InsturmentType 强检器具类别>
+.示例响应Array< <<InsturmentType强检器具类别>> >
 ```
 HTTP/1.1 200 OK
 [
@@ -1355,7 +1355,7 @@ HTTP/1.1 200 OK
 | validityDate | 有效期至 | string(date)
 |===
 
-=== InsturmentType 强检器具类别
+=== InsturmentType强检器具类别
 |===
 | 字段名 | 描述 | 类型
 | id | 主键 | int64
