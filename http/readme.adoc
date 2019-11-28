@@ -1262,7 +1262,8 @@ HTTP/1.1 200 OK
 
 .示例请求
 ```
-GET /instrumentType?x-auth-token=30da72f1-62c4-4ca0-9d8f-706b6f8fc8c2
+GET /instrumentType HTTP/1.1
+x-auth-token: 30da72f1-62c4-4ca0-9d8f-706b6f8fc8c2
 ```
 
 .示例响应Array<InsturmentType 强检器具类别>
