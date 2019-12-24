@@ -1,0 +1,47 @@
+== 获取某个强检器具（二级）类别的准确度等级列表
+`GET /Accuracy/instrumentTypeId/{1}`
+
+=== 描述
+
+
+.请求参数
+|===
+| 请求类型 | 名称 |  描述 | Schema
+| Path | id**required** |  （二级）器具类别ID | integer(int64)
+|===
+
+.响应
+|===
+| http状态码 | 描述 | Schema |
+| 200 | OK | array< <<Accuracy精确度等级>> > |
+| 401 | 用户未认证或认证信息失效 | - |
+| 404 | 器具类别不存在 | - |
+|===
+
+
+.请求示例
+```
+GET /Accuracy/instrumentTypeId/1 HTTP/1.1
+Content-Type: application/json
+x-auth-token: 4f806ac2-d4d8-4274-b730-df986cf8810e
+```
+
+.响应示例
+```
+[
+    {
+        "id": 1,
+        "value": "1.6（1.5）级",
+        "pinyin": "1",
+        "weight": 4,
+        "updateTime": 1577156483000
+    },
+    {
+        "id": 2,
+        "value": "0.16级",
+        "pinyin": "1",
+        "weight": 9,
+        "updateTime": 1577156483000
+    }
+]
+```
