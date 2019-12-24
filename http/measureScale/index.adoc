@@ -1,0 +1,5 @@
+== 测量范围接口
+
+include::getListById.adoc[]
+include::getListByInstrumentTypeId.adoc[]
+include::getRevisionsById.adoc[]

@@ -109,6 +109,7 @@ x-auth-token: 30da72f1-62c4-4ca0-9d8f-706b6f8fc8c2
     "status": 0
 }
 ```
+include::accuracy/index.adoc[]
 
 == 通知接口
 该接口下发系统的所有通知（比如：有新的检定申请时，系统会下发通知）。
@@ -1216,6 +1217,8 @@ TIP: 请忽略未在参数列表中声明的查询字段
     ]
 }
 ```
+
+include::measureScale/index.adoc[]
 
 == 其它接口
 === 获取辖区内器具用户的基本信息
