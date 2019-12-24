@@ -1,0 +1,9 @@
+=== Accuracy精确度等级
+
+|===
+| 字段名 | 描述 | 类型
+| id | PK | integer(int64)
+| updateTime | 更新时间戳 | integer(int64)
+| value | 值 | string
+| weight | 权重(权重越小越靠前) | integer
+|===

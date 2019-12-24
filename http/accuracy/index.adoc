@@ -1,0 +1,6 @@
+== 准(精)确度等级接口列表
+
+include::getListById.adoc[]
+include::getListByInstrumentTypeId.adoc[]
+include::getRevisionsById.adoc[]
+

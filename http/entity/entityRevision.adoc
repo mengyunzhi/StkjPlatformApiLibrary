@@ -1,0 +1,7 @@
+=== EntityRevision变更记录
+
+|===
+| 字段名 | 描述 | 类型
+| data | <T> | 泛型
+| revision | 版本信息 | <<Revision实体变更版本>>
+|===

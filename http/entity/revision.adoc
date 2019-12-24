@@ -1,0 +1,8 @@
+=== Revision实体变更版本
+
+|===
+| 字段名 | 描述 | 类型
+| id | 事务ID | integer
+| time | 事务发生的时间 | timestamp
+| type | 变更类型：ADD 新增; MOD 修改；DEL 删除 | string
+|===
