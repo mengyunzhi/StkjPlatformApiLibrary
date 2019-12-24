@@ -1,10 +1,10 @@
 === 获取某个强检器具（二级）类别下的准确度等级列表
-`GET /Accuracy/instrumentTypeId/{1}`
+`GET /Accuracy/instrumentTypeId/{id}`
 
 .请求参数
 |===
 | 请求类型 | 名称 |  描述 | Schema
-| Path | id**required** |  （二级）器具类别ID | integer(int64)
+| Path | id  **required** |  （二级）器具类别ID | integer(int64)
 |===
 
 .响应

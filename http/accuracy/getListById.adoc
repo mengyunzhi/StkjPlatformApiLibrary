@@ -1,10 +1,10 @@
 === 获取准(精)确度等级详情
-`GET /Accuracy/{1}`
+`GET /Accuracy/{id}`
 
 .请求参数
 |===
 | 请求类型 | 名称 |  描述 | Schema
-| Path | id**required** | 准(精)确度等级ID | integer(int64)
+| Path | id **required** | 准(精)确度等级ID | integer(int64)
 |===
 
 .响应

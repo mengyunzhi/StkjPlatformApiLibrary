@@ -66,7 +66,7 @@ Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
 
 .响应
 |===
-| 请求类型 | 名称 |  描述 | 类型
+| 响应类型 | 名称 |  描述 | 类型
 | Header | x-auth-token | 用于后续登录的认证token | string
 | Body | | <<User登录用户,User登录用户>> | jsonObject
 |===

@@ -1,11 +1,11 @@
 === 获取测量范围详情
-`GET /MeasureScale/{1}`
+`GET /MeasureScale/{id}`
 
 
 .请求参数
 |===
 | 请求类型 | 名称 |  描述 | Schema
-| Path | id**required** | 测量范围ID | integer(int64)
+| Path | id **required** | 测量范围ID | integer(int64)
 |===
 
 .响应
