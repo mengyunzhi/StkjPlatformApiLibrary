@@ -908,7 +908,18 @@ HTTP/1.1 200 OK
 | 7 | 合格 -- 一次合格 -- 合格证
 | 8 | 不合格 -- 不出证
 |===
-=== 综合查询
+
+
+.acceptedStatus
+|===
+| 值 | 说明
+| -1 | 退检
+| -2 | 不检
+| 0 | 未受理
+| 1 | 未检
+| 2 | 检毕
+|===
+
 `GET /MandatoryInstrumentCheckInfo/pageAllOfTechnicalInstitutionDepartmentBySpecification`
 
 .参数
