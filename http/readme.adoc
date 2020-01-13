@@ -896,6 +896,18 @@ x-auth-token: 30da72f1-62c4-4ca0-9d8f-706b6f8fc8c2
 HTTP/1.1 200 OK
 ```
 
+.CheckResult 检定结果列表
+|===
+| id | 检定结果
+| 1 | 不合格
+| 2 | 合格
+| 3 | 合格 -- 一次合格
+| 4 | 合格 -- 铅封
+| 5 | 合格 -- 合格证
+| 6 | 合格 -- 一次合格 -- 铅封
+| 7 | 合格 -- 一次合格 -- 合格证
+| 8 | 不合格 -- 不出证
+|===
 === 综合查询
 `GET /MandatoryInstrumentCheckInfo/pageAllOfTechnicalInstitutionDepartmentBySpecification`
 
