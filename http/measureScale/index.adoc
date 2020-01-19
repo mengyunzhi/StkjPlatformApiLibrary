@@ -3,3 +3,4 @@
 include::getListById.adoc[]
 include::getListByInstrumentTypeId.adoc[]
 include::getRevisionsById.adoc[]
+include::getAllRevisionsByTimestampGreaterThan.adoc[]

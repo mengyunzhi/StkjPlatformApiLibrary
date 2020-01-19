@@ -1,0 +1,56 @@
+=== 根据条件获取测量范围的历史版本
+`GET /MeasureScale/revisions`
+
+.请求参数
+|===
+| 请求类型 | 名称 |  描述 | Schema
+| Param | startTimestamp **required** | 起始时间戳（不含） | integer(int64)
+|===
+
+.响应
+|===
+| http状态码 | 描述 | Schema |
+| 200 | OK | Array< <<EntityRevision实体版本>> < <<MeasureScale精确度等级>> > > |
+| 401 | 用户未认证或认证信息失效 | - |
+|===
+
+
+.请求示例
+```
+GET /MeasureScale/revisions?startTimestamp=1577176921001 HTTP/1.1
+x-auth-token: adb76c8c-775d-4dbd-af1f-5d556a8dccbf
+```
+
+.响应示例
+```
+[
+    {
+        "data": {
+            "id": 1283,
+            "value": "250m",
+            "pinyin": "250",
+            "updateTime": 1577205721000,
+            "weight": 15
+        },
+        "revision": {
+            "id": 1,
+            "time": 1577176921002,
+            "type": "ADD"
+        }
+    },
+    {
+        "data": {
+            "id": 1283,
+            "value": "210m",
+            "pinyin": "210",
+            "updateTime": 1577205746000,
+            "weight": 15
+        },
+        "revision": {
+            "id": 2,
+            "time": 1577176945924,
+            "type": "MOD"
+        }
+    }
+]
+```

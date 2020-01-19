@@ -124,7 +124,7 @@ TIP: 该接口请求每分钟最多请求1次。
 | 类型 | 名称 | 描述 | 默认值
 | int  | page | 第几页 |  0
 | int  | size | 每页大小 | {size}
-| string`|`array | sort | 排序信息 | `id,desc`
+| string | array | sort | 排序信息 | `id,desc`
 |===
 
 示例请求：
