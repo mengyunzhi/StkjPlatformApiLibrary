@@ -1,0 +1,81 @@
+== 登录接口
+
+TIP: 以下接口均省略了服务器地址及前缀: `{prefix}` 。示例：接口地址为 `/abc` ，则实际的访问地址为：`{url}{prefix}/abc`。
+
+登录接口支持所有的请求方法：get,post,put,patch以及delete
+
+* `GET /User/login`
+* `POST /User/login`
+* 等
+
+.参数
+|===
+| 请求类型 | 名称 |  描述 | 类型
+| Header | Authorization | Basic64对用户名密码加密后的字符串 | string
+|===
+
+TIP: Basic access authentication（HTTP基本认证），请参考 https://zh.wikipedia.org/wiki/HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81
+
+基本步骤如下：
+
+. 假设用户名为 `zhangsan`，密码为 `stkj`
+. 拼接如下字符串: `zhangsan:stkj`
+. 使用Base64进行加密：base64(`zhangsan:stkj`)，得到加密后的自符串 `emhhbmdzYW46c3Rrag==`
+. 在加密后的自符串前加入 `Basic`后，得到认证字符串 `Basic emhhbmdzYW46c3Rrag==`
+. 将认证字符串，作用header头请求。键为：`Authorization`值为`Basic emhhbmdzYW46c3Rrag==`
+. 登录成功后，响应状态码 `200`，返回数据为当前登录用户信息。登录不成功，响应状态码 `401`。
+. 获取响应头中的 `x-auth-token`字段，假设为：`de44cf11861adf2d675f120b221e5f7011551858443`。
+. 发起其它请求时，在header中加入 `x-auth-token`，值设置为 `de44cf11861adf2d675f120b221e5f7011551858443`。
+
+.请求示例(以get方法为例)
+```
+GET /User/login HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+```
+
+.响应
+|===
+| 响应类型 | 名称 |  描述 | 类型
+| Header | x-auth-token | 用于后续登录的认证token | string
+| Body | | <<User登录用户,User登录用户>> | jsonObject
+|===
+
+.示例响应
+```
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+x-auth-token: 30da72f1-62c4-4ca0-9d8f-706b6f8fc8c2
+
+{
+    "department": {
+        "id": 13,
+        "name": "单位名称霸州计量",
+        "code": "40468",
+        "postalCode": "065600",
+        "address": "地址霸州计量",
+        "legalName": "法人霸州计量",
+        "legalPhone": "11111111111",
+        "registrantName": "注册人霸州计量",
+        "registrantPhone": "11111111111",
+        "registrantTel": null,
+        "registrantMail": "",
+        "phone": "",
+        "pinyin": "",
+        "registerDate": null,
+        "createTime": 1543358939000,
+        "updateTime": 1543359175000,
+        "status": null,
+        "checkAbility": false,
+        "standard": false,
+        "outOfRange": null
+    },
+    "id": 12,
+    "name": "霸州计量",
+    "username": "bzjl",
+    "mobile": "11111111111",
+    "createTime": 1543358939000,
+    "updateTime": 1543358939000,
+    "status": 0
+}
+```

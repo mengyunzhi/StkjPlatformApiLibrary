@@ -1,0 +1,9 @@
+=== InstrumentType器具类别
+|===
+| 字段名 | 描述 | 类型
+| id | 主键 | int64
+| name | 名称 | string
+| pinyin | 拼音 | string
+| code | 对应国家平台编码 | string
+| codeName | 对应国家平台名称 | string
+|===

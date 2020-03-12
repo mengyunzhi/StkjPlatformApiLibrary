@@ -1,0 +1,642 @@
+== 强检器具检定申请接口
+=== 获取待检定的申请列表
+`GET /MandatoryInstrumentCheckApply/getByStartIdOfCurrentTechnology`
+
+.参数
+|===
+| 类型 | 名称 | 描述 | 默认值
+| integer(int64) | startId | 开始ID，指定后将返回该ID以后的记录 | 0
+| int  | page | 第几页 |  0
+| int  | size | 每页大小 | {size}
+|===
+
+示例请求：
+```
+GET /MandatoryInstrumentCheckApply/getByStartIdOfCurrentTechnology?startId=27&page=0&size=2 HTTP/1.1
+x-auth-token: 30da72f1-62c4-4ca0-9d8f-706b6f8fc8c2
+Content-Type: application/json;charset=UTF-8
+```
+
+
+.响应信息Slice«MandatoryInstrumentCheckApply (检定申请)»
+|===
+| 名称 | 类型 | 描述
+| content | <<<MandatoryInstrumentCheckApply强检器具检定申请>>> array |
+| first | boolean |  是否首页
+| last|boolean | 是否尾页
+| number | integer(int32)| 第几页
+| numberOfElements| integer(int32)| 数据总条数
+| size | integer(int32)| 每页大小
+| sort | List<<<Sort排序>>> | 排序
+|===
+
+示例响应：
+```
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+
+{
+    "content": [
+        {
+            "id": 264,
+            "createTime": 1548456685000,
+            "className": "MandatoryInstrumentCheck",
+            "name": "强检器具检定申请",
+            "applyTime": 1548456685000,
+            "createUserName": "dcxw",
+            "createUserMobile": "18511266640",
+            "department": {
+                "id": 110,
+                "name": "大城县董家务信维建材厂",
+                "postalCode": "111111",
+                "address": "地址",
+                "legalName": "法人",
+                "legalPhone": "13131313131",
+                "phone": "",
+                "pinyin": "",
+                "status": null,
+                "district": {
+                    "id": 12,
+                    "name": "大城县",
+                    "pinyin": "dachengxian",
+                    "recordRule": 0,
+                    "code": "131025",
+                    "recordRuleCode": 0,
+                    "shiName": "廊坊市",
+                    "quxianName": "大城县"
+                },
+                "checkAbility": false,
+                "standard": false,
+                "outOfRange": null
+            },
+            "auditingDepartment": {
+                "id": 72,
+                "name": "大城计量所",
+                "postalCode": "11111111",
+                "address": "大城",
+                "legalName": "刘栓",
+                "legalPhone": "13456788765",
+                "phone": "",
+                "pinyin": "",
+                "status": null,
+                "district": {
+                    "id": 12,
+                    "name": "大城县",
+                    "pinyin": "dachengxian",
+                    "recordRule": 0,
+                    "code": "131025",
+                    "recordRuleCode": 0,
+                    "shiName": "廊坊市",
+                    "quxianName": "大城县"
+                },
+                "checkAbility": false,
+                "standard": false,
+                "outOfRange": null
+            },
+            "auditingUser": null,
+            "instrumentCheckInfoList": [
+                {
+                    "id": 469,
+                    "certificateNum": null,
+                    "cost": null,
+                    "checkDate": null,
+                    "checkYear": 0,
+                    "validityDate": null,
+                    "checkResult": null,
+                    "mandatoryInstrument": {
+                        "id": 252,
+                        "createTime": 1548445244000,
+                        "fixSite": "大城",
+                        "serialNum": "0J06113690",
+                        "name": "压力表",
+                        "outOfFactoryName": "压力表",
+                        "specificationName": "（0~1.6）Mpa",
+                        "status": 0,
+                        "checking": true,
+                        "importedOrNot": false,
+                        "deleted": false,
+                        "department": {
+                            "id": 110,
+                            "name": "大城县董家务信维建材厂",
+                            "postalCode": "111111",
+                            "address": "地址",
+                            "legalName": "法人",
+                            "legalPhone": "13131313131",
+                            "phone": "",
+                            "pinyin": "",
+                            "status": null,
+                            "district": {
+                                "id": 12,
+                                "name": "大城县",
+                                "pinyin": "dachengxian",
+                                "recordRule": 0,
+                                "code": "131025",
+                                "recordRuleCode": 0,
+                                "shiName": "廊坊市",
+                                "quxianName": "大城县"
+                            },
+                            "checkAbility": false,
+                            "standard": false,
+                            "outOfRange": null
+                        },
+                        "purchaseDate": "2019-01-26",
+                        "accuracy": {
+                            "id": 1,
+                            "value": "1.6（1.5）级",
+                            "pinyin": "1"
+                        },
+                        "measureScale": "0 ~ 1.6MPa",
+                        "instrumentType": {
+                            "id": 1,
+                            "name": "压力表",
+                            "pinyin": "yalibiao",
+                            "instrumentFirstLevelType": {
+                                "id": 1,
+                                "discipline": {
+                                    "id": 9,
+                                    "name": "力学",
+                                    "pinyin": "lixue",
+                                    "code": "9",
+                                    "weight": -2147483640,
+                                    "createUser": null
+                                },
+                                "name": "压力表",
+                                "pinyin": "yalibiao",
+                                "code": "025"
+                            },
+                            "code": "025001",
+                            "codeName": "压力表",
+                            "createUser": null
+                        },
+                        "generativeDepartment": {
+                            "id": 122,
+                            "name": "上海亿川仪表厂",
+                            "postalCode": "",
+                            "address": "",
+                            "legalName": "",
+                            "legalPhone": "",
+                            "phone": "",
+                            "pinyin": "",
+                            "status": null,
+                            "district": null,
+                            "checkAbility": false,
+                            "standard": false,
+                            "outOfRange": null
+                        },
+                        "audit": true,
+                        "auditDate": "2019-01-26",
+                        "attachments": [],
+                        "managementDepartmentBackedReason": null,
+                        "nextCheckDate": "2020-01-26",
+                        "lastCheckDate": null,
+                        "overdue": false
+                    },
+                    "acceptedStatus": 0,
+                    "remarks": "",
+                    "backedReason": null
+                }
+            ],
+            "plannedCheckDate": null,
+            "remarks": "大城县董家务信维建材厂",
+            "replyRemarks": null,
+            "checkPlace": "大城县董家务信维建材厂",
+            "status": 0,
+            "notAcceptedReason": null,
+            "acceptedTerminalType": 0,
+            "startTime": null,
+            "endTime": null,
+            "lastModifiedTime": 1548456685000,
+            "done": false,
+            "agree": null
+        }
+    ],
+    "size": 1,
+    "number": 0,
+    "last": false,
+    "numberOfElements": 1,
+    "first": true,
+    "sort": [
+        {
+            "direction": "ASC",
+            "property": "id",
+            "ignoreCase": false,
+            "nullHandling": "NATIVE",
+            "ascending": true,
+            "descending": false
+        }
+    ]
+}
+```
+
+=== 获取某个强检器具检定申请信息
+`GET /MandatoryInstrumentCheckApply/{id}`
+
+.参数
+|===
+| 类型 | 名称 | 描述 | 默认值
+| integer(int64) | id | PK |
+|===
+
+示例请求：
+```
+GET /MandatoryInstrumentCheckApply/263 HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+x-auth-token: 30da72f1-62c4-4ca0-9d8f-706b6f8fc8c2
+```
+
+示例响应：
+```
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+
+{
+    "id": 263,
+    "createTime": 1548456636000,
+    "className": "MandatoryInstrumentCheck",
+    "name": "强检器具检定申请",
+    "applyTime": 1548456636000,
+    "createUserName": "lfzz",
+    "createUserMobile": "18511266640",
+    "department": {
+        "id": 104,
+        "name": "廊坊正张食用油有限公司",
+        "postalCode": "123456",
+        "address": "地址",
+        "legalName": "法人",
+        "legalPhone": "13131313131",
+        "phone": "",
+        "pinyin": "",
+        "status": null,
+        "district": {
+            "id": 12,
+            "name": "大城县",
+            "pinyin": "dachengxian",
+            "recordRule": 0,
+            "code": "131025",
+            "recordRuleCode": 0,
+            "shiName": "廊坊市",
+            "quxianName": "大城县"
+        },
+        "checkAbility": false,
+        "standard": false,
+        "outOfRange": null
+    },
+    "auditingDepartment": {
+        "id": 72,
+        "name": "大城计量所",
+        "postalCode": "11111111",
+        "address": "大城",
+        "legalName": "刘栓",
+        "legalPhone": "13456788765",
+        "phone": "",
+        "pinyin": "",
+        "status": null,
+        "district": {
+            "id": 12,
+            "name": "大城县",
+            "pinyin": "dachengxian",
+            "recordRule": 0,
+            "code": "131025",
+            "recordRuleCode": 0,
+            "shiName": "廊坊市",
+            "quxianName": "大城县"
+        },
+        "checkAbility": false,
+        "standard": false,
+        "outOfRange": null
+    },
+    "auditingUser": null,
+    "instrumentCheckInfoList": [
+        {
+            "id": 468,
+            "certificateNum": null,
+            "cost": null,
+            "checkDate": null,
+            "checkYear": 0,
+            "validityDate": null,
+            "checkResult": null,
+            "mandatoryInstrument": {
+                "id": 251,
+                "createTime": 1548445044000,
+                "fixSite": "大城",
+                "serialNum": "5050629",
+                "name": "蒸气灭菌器压力表",
+                "outOfFactoryName": "压力表",
+                "specificationName": "（0~2.5）Mpa",
+                "status": 0,
+                "checking": true,
+                "importedOrNot": false,
+                "deleted": false,
+                "department": {
+                    "id": 104,
+                    "name": "廊坊正张食用油有限公司",
+                    "postalCode": "123456",
+                    "address": "地址",
+                    "legalName": "法人",
+                    "legalPhone": "13131313131",
+                    "phone": "",
+                    "pinyin": "",
+                    "status": null,
+                    "district": {
+                        "id": 12,
+                        "name": "大城县",
+                        "pinyin": "dachengxian",
+                        "recordRule": 0,
+                        "code": "131025",
+                        "recordRuleCode": 0,
+                        "shiName": "廊坊市",
+                        "quxianName": "大城县"
+                    },
+                    "checkAbility": false,
+                    "standard": false,
+                    "outOfRange": null
+                },
+                "purchaseDate": "2019-01-26",
+                "accuracy": {
+                    "id": 1,
+                    "value": "1.6（1.5）级",
+                    "pinyin": "1"
+                },
+                "measureScale": "0 ~ 0.4MPa",
+                "instrumentType": {
+                    "id": 1,
+                    "name": "压力表",
+                    "pinyin": "yalibiao",
+                    "instrumentFirstLevelType": {
+                        "id": 1,
+                        "discipline": {
+                            "id": 9,
+                            "name": "力学",
+                            "pinyin": "lixue",
+                            "code": "9",
+                            "weight": -2147483640,
+                            "createUser": null
+                        },
+                        "name": "压力表",
+                        "pinyin": "yalibiao",
+                        "code": "025"
+                    },
+                    "code": "025001",
+                    "codeName": "压力表",
+                    "createUser": null
+                },
+                "generativeDepartment": {
+                    "id": 122,
+                    "name": "上海亿川仪表厂",
+                    "postalCode": "",
+                    "address": "",
+                    "legalName": "",
+                    "legalPhone": "",
+                    "phone": "",
+                    "pinyin": "",
+                    "status": null,
+                    "district": null,
+                    "checkAbility": false,
+                    "standard": false,
+                    "outOfRange": null
+                },
+                "audit": true,
+                "auditDate": "2019-01-26",
+                "attachments": [],
+                "managementDepartmentBackedReason": null,
+                "nextCheckDate": "2020-01-26",
+                "lastCheckDate": null,
+                "overdue": false
+            },
+            "acceptedStatus": 0,
+            "remarks": "",
+            "backedReason": null
+        }
+    ],
+    "plannedCheckDate": null,
+    "remarks": "廊坊正张食用油有限公司",
+    "replyRemarks": null,
+    "checkPlace": "廊坊正张食用油有限公司",
+    "status": 0,
+    "notAcceptedReason": null,
+    "acceptedTerminalType": 0,
+    "startTime": null,
+    "endTime": null,
+    "lastModifiedTime": 1548456636000,
+    "done": false,
+    "agree": null
+}
+```
+
+.响应信息
+<<MandatoryInstrumentCheckApply强检器具检定申请>>
+
+=== 审核某个强检器具检定申请
+审核（适用于技术机构CS端）
+
+`PATCH /MandatoryInstrumentCheckApply/audit/{id}`
+
+.参数
+|===
+| 请求类型 | 名称 |  描述 | 类型
+| Path | id |  PK(必选项) | integer(int64)
+| Body | mandatoryInstrumentCheckApply | 检定申请 |  <<MandatoryInstrumentCheckApply强检器具检定申请>>
+|===
+
+示例请求：
+```
+PATCH /MandatoryInstrumentCheckApply/audit/18 HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+x-auth-token: 30da72f1-62c4-4ca0-9d8f-706b6f8fc8c2
+
+{"plannedCheckDate":"2019-03-02","replyRemarks": "备注"}
+```
+WARNING:   请替换为 Host: {host}，下同。
+
+示例响应：
+```
+HTTP/1.1 202 Accepted
+```
+
+=== 不接收某个检定申请
+`PATCH /MandatoryInstrumentCheckApply/doNotAccepted/{id}`
+
+.参数
+|===
+| 请求类型 | 名称 |  描述 | 类型
+| Path | id |  PK(必选项) | integer(int64)
+| Body | mandatoryInstrumentCheckApply | 检定申请 |  <<MandatoryInstrumentCheckApply强检器具检定申请>>
+|===
+
+示例请求：
+```
+PATCH /MandatoryInstrumentCheckApply/doNotAccepted/26 HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+x-auth-token: 30da72f1-62c4-4ca0-9d8f-706b6f8fc8c2
+
+{"notAcceptedReason":"不接收申请的具体原因"}
+```
+
+示例响应：
+```
+HTTP/1.1 202 OK
+```
+=== 综合查询
+`GET /MandatoryInstrumentCheckApply/sliceOfCurrentTechnicalInstitution`
+
+.参数
+|===
+| 请求类型 | 名称 |  描述 | 类型
+| Query | acceptedTerminalType | 受理终端类型(0,1,2) 0 web(default); 1 cs; 2 app | string(byte)
+| Query | applyDepartmentName | 申请部门名称 | string
+| Query | beginDate | 起始日期 | string(yyyy-mm-dd)
+| Query | endDate | 结束日期 | string(yyyy-mm-dd)
+| Query | status | 受理状态：0，未受理(default)；1 已受理；-1 不受理 | string(byte)
+| Query | page | 第几页 | string(int)
+| Query | size | 每页大小 | string(int)
+|===
+
+
+示例请求：
+```
+GET /MandatoryInstrumentCheckApply/sliceOfCurrentTechnicalInstitution?applyDepartmentName=食品&beginDate=2019-03-01&endDate=2019-03-29&status=1&page=0&size=2 HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+x-auth-token: 30da72f1-62c4-4ca0-9d8f-706b6f8fc8c2
+```
+
+示例响应：
+```
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+
+{
+    "content": [
+        {
+            "id": 324,
+            "createTime": 1552955011000,
+            "className": "MandatoryInstrumentCheck",
+            "name": "强检器具检定申请",
+            "applyTime": 1552955011000,
+            "createUserName": "姓名",
+            "createUserMobile": "18511266640",
+            "department": {
+                "id": 179,
+                "name": "霸州某食品厂",
+                "postalCode": "111111",
+                "address": "霸州",
+                "phone": "",
+                "pinyin": "",
+                "status": null,
+                "checkAbility": false,
+                "standard": false,
+                "outOfRange": null
+            },
+            "auditingDepartment": {
+                "id": 13,
+                "name": "单位名称霸州计量",
+                "postalCode": "065600",
+                "address": "地址霸州计量",
+                "phone": "",
+                "pinyin": "",
+                "status": null,
+                "checkAbility": false,
+                "standard": false,
+                "outOfRange": null
+            },
+            "auditingUser": {
+                "id": 12,
+                "name": "霸州计量",
+                "mobile": "11111111111",
+                "status": 0
+            },
+            "plannedCheckDate": "2019-03-19",
+            "remarks": "霸州",
+            "replyRemarks": "世通通过324",
+            "checkPlace": "霸州",
+            "status": 1,
+            "notAcceptedReason": null,
+            "acceptedTerminalType": 0,
+            "startTime": null,
+            "endTime": null,
+            "lastModifiedTime": 1552955255000,
+            "agree": null,
+            "done": true
+        },
+        {
+            "id": 313,
+            "createTime": 1552887389000,
+            "className": "MandatoryInstrumentCheck",
+            "name": "强检器具检定申请",
+            "applyTime": 1552887389000,
+            "createUserName": "姓名",
+            "createUserMobile": "18511266640",
+            "department": {
+                "id": 179,
+                "name": "霸州某食品厂",
+                "postalCode": "111111",
+                "address": "霸州",
+                "phone": "",
+                "pinyin": "",
+                "status": null,
+                "checkAbility": false,
+                "standard": false,
+                "outOfRange": null
+            },
+            "auditingDepartment": {
+                "id": 13,
+                "name": "单位名称霸州计量",
+                "postalCode": "065600",
+                "address": "地址霸州计量",
+                "phone": "",
+                "pinyin": "",
+                "status": null,
+                "checkAbility": false,
+                "standard": false,
+                "outOfRange": null
+            },
+            "auditingUser": {
+                "id": 12,
+                "name": "霸州计量",
+                "mobile": "11111111111",
+                "status": 0
+            },
+            "plannedCheckDate": "2019-03-19",
+            "remarks": "霸州申请",
+            "replyRemarks": "世通通过324",
+            "checkPlace": "霸州",
+            "status": 1,
+            "notAcceptedReason": null,
+            "acceptedTerminalType": 1,
+            "startTime": null,
+            "endTime": null,
+            "lastModifiedTime": 1552955795000,
+            "agree": null,
+            "done": true
+        }
+    ],
+    "last": true,
+    "totalPages": 1,
+    "totalElements": 2,
+    "size": 2,
+    "number": 0,
+    "numberOfElements": 2,
+    "first": true,
+    "sort": [
+        {
+            "direction": "DESC",
+            "property": "id",
+            "ignoreCase": false,
+            "nullHandling": "NATIVE",
+            "descending": true,
+            "ascending": false
+        }
+    ]
+}
+```
+
+.响应信息Slice«MandatoryInstrumentCheckApply (检定申请)»
+|===
+| 名称 | 类型 | 描述
+| content | <<<mandatoryInstrumentCheckApply强检器具检定申请>>> array |
+| first | boolean |  是否首页
+| last|boolean | 是否尾页
+| number | integer(int32)| 第几页
+| numberOfElements| integer(int32)| 数据总条数
+| size | integer(int32)| 每页大小
+| sort | List<<<Sort排序>>> | 排序
+|===

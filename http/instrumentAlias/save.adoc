@@ -1,0 +1,33 @@
+=== 新建器具别名
+`POST /InstrumentAlias`
+
+.请求Body
+|===
+| 字段 | 名称 |  类型  |
+| instrumentType | 器具类别 |  {id: integer(int64)} |
+| name | 名称 | string |
+|===
+
+.请求示例
+```
+      HTTP Method = POST
+      Request URI = /InstrumentAlias
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+             Body = {"instrumentType":{"id":"-7428405515380056824"},"name":"hCo6"}
+```
+
+.响应
+|===
+| http状态码 | 描述 | Schema |
+| 201 | OK | <<InstrumentAlias器具别名>> |
+| 401 | 用户未认证或认证信息失效 | - |
+|===
+
+.响应示例
+```
+           Status = 201
+     Content type = application/json;charset=UTF-8
+             Body = {"id":-6941299477505338560,"name":"hCo6"}
+```
+
+

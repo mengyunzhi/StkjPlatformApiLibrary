@@ -1,0 +1,116 @@
+== 通知接口
+该接口下发系统的所有通知（比如：有新的检定申请时，系统会下发通知）。
+
+=== 获取未确认的通知列表
+`GET /Notice/getUnConfirmedNoticeSlice`
+
+TIP: 该接口请求每分钟最多请求1次。
+
+.参数
+|===
+| 类型 | 名称 | 描述 | 默认值
+| int  | page | 第几页 |  0
+| int  | size | 每页大小 | {size}
+| string | array | sort | 排序信息 | `id,desc`
+|===
+
+示例请求：
+```
+GET /Notice/getUnConfirmedNoticeSlice?page=0&size=2 HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+x-auth-token: 30da72f1-62c4-4ca0-9d8f-706b6f8fc8c2
+```
+
+WARNING:   请替换为 Host: {host}，下同。
+
+.返回值 Slice<Notice>
+|===
+| 名称 | 类型 | 描述
+| content | List<<<Notice通知>>> | 通知列表
+| numberOfElements | int | 返回的数据条数
+| last | boolean | 是否最后一页
+| sort | List<<<Sort排序>>> | 排序
+| first | boolean | 是否第一页
+| size | int | 每页大小
+| number | int | 第几页
+|===
+
+.响应示例 200
+```
+{
+    "content": [
+        {
+            "id": 1,
+            "type": "MandatoryInstrumentCheckApply",
+            "jsonData": {
+                "id": 18
+            },
+            "url": "/MandatoryInstrumentCheckApply/18",
+            "createTime": 1543362155000,
+            "lastSendTime": null,
+            "lastConfirmTime": 1543452938000,
+            "isConfirmed": false
+        },
+        {
+            "id": 3,
+            "type": "MandatoryInstrumentCheckApply",
+            "jsonData": {
+                "id": 19
+            },
+            "url": "/MandatoryInstrumentCheckApply/19",
+            "createTime": 1543362180000,
+            "lastSendTime": null,
+            "lastConfirmTime": 1543455187000,
+            "isConfirmed": false
+        }
+    ],
+    "size": 2,
+    "number": 0,
+    "last": false,
+    "numberOfElements": 2,
+    "first": true,
+    "sort": [
+        {
+            "direction": "ASC",
+            "property": "id",
+            "ignoreCase": false,
+            "nullHandling": "NATIVE",
+            "ascending": true,
+            "descending": false
+        }
+    ]
+}
+```
+
+.响应示例 423
+```
+{
+    "message": "距离上次调用本方法的间隔过短，请稍后重试",
+    "method": "GET",
+    "url": "http://127.0.0.1:8081/api/notice/getUnConfirmedNoticeSlice"
+}
+```
+
+=== 通知确认
+获取某个部门未确认的通知列表
+
+`PUT /Notice/confirm/{id}`
+
+.参数
+|===
+| 类型 | 名称 | 描述 | 默认值
+| integer(int64) | id | PK(必选项) |
+|===
+
+示例请求：
+```
+PUT /Notice/confirm/2 HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+x-auth-token: 30da72f1-62c4-4ca0-9d8f-706b6f8fc8c2
+
+```
+
+示例响应：
+```
+HTTP/1.1 202 Accepted
+```
