@@ -1,0 +1,68 @@
+== 其它接口
+=== 获取辖区内器具用户的基本信息
+`GET /Department/getByIdOfCurrentTechnology/{id}`
+
+.参数
+|===
+| 请求类型 | 名称 |  描述 | 类型
+| Path | id | 器具用户ID | integer(int64)
+|===
+
+.示例请求
+```
+GET /Department/getByIdOfCurrentTechnology/9 HTTP/1.1
+x-auth-token: 30da72f1-62c4-4ca0-9d8f-706b6f8fc8c2
+```
+
+.示例响应Department
+<<Department部门>>
+
+```
+HTTP/1.1 200 OK
+
+{
+    "id": 9,
+    "name": "单位名称B",
+    "postalCode": "065600",
+    "address": "地址B",
+    "phone": "13888888888",
+    "pinyin": "",
+    "status": 0
+}
+```
+
+=== 获取所有的强检器具类别接口
+`GET /instrumentType`
+
+.参数
+|===
+| 请求类型 | 名称 |  描述 | 类型
+|===
+
+
+.示例请求
+```
+GET /instrumentType HTTP/1.1
+x-auth-token: 30da72f1-62c4-4ca0-9d8f-706b6f8fc8c2
+```
+
+.示例响应Array< <<InsturmentType强检器具类别>> >
+```
+HTTP/1.1 200 OK
+[
+    {
+        "id": 1,
+        "name": "压力表",
+        "pinyin": "yalibiao",
+        "code": "025001",
+        "codeName": "压力表",
+    },
+    {
+        "id": 3,
+        "name": "钢卷尺",
+        "pinyin": "gangjuanchi",
+        "code": "001003",
+        "codeName": "钢卷尺"
+    }
+]
+```

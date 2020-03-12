@@ -1,0 +1,10 @@
+=== Department部门
+|===
+| 字段名 | 描述 | 类型
+| address | 地址 | string
+| district | 关联区域 | District (区域)
+| id | PK | integer(int64)
+| name | 名称 | string
+| phone | 联系电话 | string
+| status | 状态 | boolean
+|===

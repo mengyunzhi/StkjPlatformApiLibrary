@@ -1,0 +1,12 @@
+=== User登录用户
+|===
+| 字段名 | 描述 | 类型
+| createTime | 创建时间 | Calendar
+| department | 部门 |  Department (部门)
+| id | PK | integer(int64)
+| mobile | 手机号 | string
+| name | 姓名 | string
+| status | 状态:-1未审核; 0已审核；1已冻结；2其它 | integer(int32)
+| username | 用户名 | string
+| | |
+|===

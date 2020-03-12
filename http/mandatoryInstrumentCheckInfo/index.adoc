@@ -1,0 +1,369 @@
+== 强检器具检定信息接口
+=== 回传检定信息
+`PUT /MandatoryInstrumentCheckInfo/uploadByTechnicalInstitution/{id}`
+
+.参数
+|===
+| 请求类型 | 名称 |  描述 | 类型
+| Path | id | PK | integer(int64)
+|Body | instrumentCheckInfo | 器具检定信息实体 | <<InstrumentCheckInfo强制检定器具检定信息>>
+|===
+
+.示例请求
+```
+PUT /MandatoryInstrumentCheckInfo/uploadByTechnicalInstitution/8 HTTP/1.1
+Content-Type: application/json
+x-auth-token: 30da72f1-62c4-4ca0-9d8f-706b6f8fc8c2
+
+{"certificateNum":"证书编号","cost":"208","checkDate":"2017-03-29","checkResult":{"id":1},"acceptedStatus":2}
+```
+
+.示例响应
+```
+HTTP/1.1 200 OK
+```
+
+.CheckResult 检定结果列表
+|===
+| id | 检定结果
+| 1 | 不合格
+| 2 | 合格
+| 3 | 合格 -- 一次合格
+| 4 | 合格 -- 铅封
+| 5 | 合格 -- 合格证
+| 6 | 合格 -- 一次合格 -- 铅封
+| 7 | 合格 -- 一次合格 -- 合格证
+| 8 | 不合格 -- 不出证
+|===
+
+
+.acceptedStatus
+|===
+| 值 | 说明
+| -1 | 退检
+| -2 | 不检
+| 0 | 未受理
+| 1 | 未检
+| 2 | 检毕
+|===
+
+`GET /MandatoryInstrumentCheckInfo/pageAllOfTechnicalInstitutionDepartmentBySpecification`
+
+.参数
+|===
+| 请求类型 | 名称 |  描述 | 类型
+| Query | acceptedStatus | 受理状态：0，未受理(default)；1 已受理；-1 不受理 | string(byte)
+| Query | certificateNum | 证书编号 | string
+| Query | checkResultId | 检定结果id | integer(int64)
+| Query | departmentId | 器具用户id | integer(int64)
+| Query | districtId | 器具用户所在区域ID | integer(int64)
+| Query | disciplineId | 学科类别ID | integer(int64)
+| Query | instrumentFirstLevelTypeId | 一级器具类别ID | integer(int64)
+| Query | instrumentTypeId | 器具类别ID | integer(int64)
+| Query | mandatoryInstrumentId | 强检器具系统编号 | integer(int64)
+| Query | accuracyId | 精确度ID | integer(int64)
+| Query | name| 强检器具名称 | string
+| Query | year | 检定年度 | integer(int64)
+| Query | page | 第几页 | string(int)
+| Query | size | 每页大小 | string(int)
+|===
+
+.请求示例
+```
+GET /MandatoryInstrumentCheckInfo/pageAllOfTechnicalInstitutionDepartmentBySpecification?size=2&page=32 HTTP/1.1
+Content-Type: application/json
+x-auth-token: 30da72f1-62c4-4ca0-9d8f-706b6f8fc8c2
+```
+
+TIP: 请忽略未在参数列表中声明的查询字段
+
+.响应 Page«InstrumentCheckInfo (强制检定器具检定信息)»
+|===
+| 名称 | 类型 | 描述
+| content | <<<InstrumentCheckInfo强制检定器具检定信息>>> array |
+| first | boolean |  是否首页
+| last|boolean | 是否尾页
+| number | integer(int32)| 第几页
+| numberOfElements| integer(int32)| 数据总条数
+| size | integer(int32)| 每页大小
+| sort | List<<<Sort排序>>> | 排序
+| totalElements | integer(int64)  | 共多少条
+| totalPages | integer(int32) | 共多少页
+|===
+
+*请求成功状态码：* 200
+
+. 响应示例
+```
+{
+    "content": [
+        {
+            "id": 262,
+            "cost": null,
+            "checkDate": "2019-01-05",
+            "checkYear": 2019,
+            "validityDate": "2020-01-04",
+            "checkResult": {
+                "id": 2,
+                "pinyin": "hege",
+                "name": "合格"
+            },
+            "mandatoryInstrument": {
+                "id": 193,
+                "createTime": 1546625501000,
+                "fixSite": "beiugin",
+                "serialNum": "ceshi001",
+                "name": "尺子１",
+                "outOfFactoryName": "尺子１",
+                "specificationName": "ceshi001",
+                "status": 0,
+                "checking": false,
+                "importedOrNot": false,
+                "deleted": false,
+                "department": {
+                    "id": 63,
+                    "name": "霸州食品",
+                    "postalCode": "111111",
+                    "address": "霸州",
+                    "phone": "",
+                    "pinyin": "",
+                    "status": null,
+                    "checkAbility": false,
+                    "standard": false,
+                    "outOfRange": null
+                },
+                "purchaseDate": "2019-01-05",
+                "accuracy": {
+                    "id": 14,
+                    "value": "Ⅱ级",
+                    "pinyin": "2"
+                },
+                "measureScale": "0 ~ 5m",
+                "instrumentType": {
+                    "id": 3,
+                    "name": "钢卷尺",
+                    "pinyin": "gangjuanchi",
+                    "instrumentFirstLevelType": {
+                        "id": 5,
+                        "discipline": {
+                            "id": 1,
+                            "name": "长度",
+                            "pinyin": "changdu",
+                            "code": "1",
+                            "weight": -2147483648,
+                            "createUser": null
+                        },
+                        "name": "尺",
+                        "pinyin": "chi",
+                        "code": "001"
+                    },
+                    "code": "001003",
+                    "codeName": "钢卷尺",
+                    "createUser": null
+                },
+                "audit": true,
+                "auditDate": "2019-01-05",
+                "attachments": [],
+                "managementDepartmentBackedReason": null,
+                "nextCheckDate": "2020-01-04",
+                "lastCheckDate": "2019-01-05",
+                "overdue": false
+            },
+            "mandatoryInstrumentCheckApply": {
+                "id": 181,
+                "createTime": 1546625754000,
+                "className": "MandatoryInstrumentCheck",
+                "name": "强检器具检定申请",
+                "applyTime": 1546625754000,
+                "createUserName": "nnnn",
+                "createUserMobile": "12345670980",
+                "department": {
+                    "id": 63,
+                    "name": "霸州食品",
+                    "postalCode": "111111",
+                    "address": "霸州",
+                    "phone": "",
+                    "pinyin": "",
+                    "status": null,
+                    "checkAbility": false,
+                    "standard": false,
+                    "outOfRange": null
+                },
+                "auditingDepartment": {
+                    "id": 13,
+                    "name": "单位名称霸州计量",
+                    "postalCode": "065600",
+                    "address": "地址霸州计量",
+                    "phone": "",
+                    "pinyin": "",
+                    "status": null,
+                    "checkAbility": false,
+                    "standard": false,
+                    "outOfRange": null
+                },
+                "auditingUser": {
+                    "id": 12,
+                    "name": "霸州计量",
+                    "mobile": "11111111111",
+                    "status": 0
+                },
+                "plannedCheckDate": "2019-01-13",
+                "remarks": "现场测试",
+                "replyRemarks": "同意受理",
+                "checkPlace": "现场测试",
+                "status": 1,
+                "notAcceptedReason": null,
+                "acceptedTerminalType": 1,
+                "startTime": null,
+                "endTime": null,
+                "lastModifiedTime": 1546626914000,
+                "agree": null,
+                "done": true
+            },
+            "acceptedStatus": 2,
+            "remarks": "",
+            "backedReason": null
+        },
+        {
+            "id": 258,
+            "cost": null,
+            "checkDate": null,
+            "checkYear": 0,
+            "validityDate": null,
+            "checkResult": null,
+            "mandatoryInstrument": {
+                "id": 49,
+                "createTime": 1545240438000,
+                "fixSite": "22",
+                "serialNum": "018011",
+                "name": "包装机",
+                "outOfFactoryName": "包装机",
+                "specificationName": "22",
+                "status": 0,
+                "checking": true,
+                "importedOrNot": false,
+                "deleted": false,
+                "department": {
+                    "id": 9,
+                    "name": "单位名称B",
+                    "postalCode": "065600",
+                    "address": "地址B",
+                    "phone": "",
+                    "pinyin": "",
+                    "status": null,
+                    "checkAbility": false,
+                    "standard": false,
+                    "outOfRange": null
+                },
+                "purchaseDate": "2018-12-20",
+                "accuracy": {
+                    "id": 73,
+                    "value": "±3%",
+                    "pinyin": "1"
+                },
+                "measureScale": "10ml ~ 400ml",
+                "instrumentType": {
+                    "id": 21,
+                    "name": "定量灌装机（定容）",
+                    "pinyin": "dingliangguanzhuangji",
+                    "instrumentFirstLevelType": {
+                        "id": 14,
+                        "discipline": {
+                            "id": 9,
+                            "name": "力学",
+                            "pinyin": "lixue",
+                            "code": "9",
+                            "weight": -2147483640,
+                            "createUser": null
+                        },
+                        "name": "定量包装机",
+                        "pinyin": "dingliangbaozhuangji",
+                        "code": "011"
+                    },
+                    "code": "011002",
+                    "codeName": "定量灌装机",
+                    "createUser": null
+                },
+                "audit": true,
+                "auditDate": "2018-12-20",
+                "attachments": [],
+                "managementDepartmentBackedReason": null,
+                "nextCheckDate": "2019-12-20",
+                "lastCheckDate": null,
+                "overdue": false
+            },
+            "mandatoryInstrumentCheckApply": {
+                "id": 175,
+                "createTime": 1546389991000,
+                "className": "MandatoryInstrumentCheck",
+                "name": "强检器具检定申请",
+                "applyTime": 1546389991000,
+                "createUserName": "bzab",
+                "createUserMobile": "18511266640",
+                "department": {
+                    "id": 9,
+                    "name": "单位名称B",
+                    "postalCode": "065600",
+                    "address": "地址B",
+                    "phone": "",
+                    "pinyin": "",
+                    "status": null,
+                    "checkAbility": false,
+                    "standard": false,
+                    "outOfRange": null
+                },
+                "auditingDepartment": {
+                    "id": 13,
+                    "name": "单位名称霸州计量",
+                    "postalCode": "065600",
+                    "address": "地址霸州计量",
+                    "phone": "",
+                    "pinyin": "",
+                    "status": null,
+                    "checkAbility": false,
+                    "standard": false,
+                    "outOfRange": null
+                },
+                "auditingUser": {
+                    "id": 12,
+                    "name": "霸州计量",
+                    "mobile": "11111111111",
+                    "status": 0
+                },
+                "plannedCheckDate": "2019-01-02",
+                "remarks": "zzz",
+                "replyRemarks": "同意受理",
+                "checkPlace": "zzz",
+                "status": 1,
+                "notAcceptedReason": null,
+                "acceptedTerminalType": 1,
+                "startTime": null,
+                "endTime": null,
+                "lastModifiedTime": 1546390544000,
+                "agree": null,
+                "done": true
+            },
+            "acceptedStatus": 1,
+            "remarks": "",
+            "backedReason": null
+        }
+    ],
+    "totalPages": 65,
+    "totalElements": 130,
+    "last": false,
+    "size": 2,
+    "number": 32,
+    "numberOfElements": 2,
+    "first": false,
+    "sort": [
+        {
+            "direction": "DESC",
+            "property": "id",
+            "ignoreCase": false,
+            "nullHandling": "NATIVE",
+            "ascending": false,
+            "descending": true
+        }
+    ]
+}
+```

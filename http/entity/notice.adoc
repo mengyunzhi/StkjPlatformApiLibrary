@@ -1,0 +1,12 @@
+=== Notice通知
+.Notice
+|===
+|字段名 | 描述 | 类型
+| createTime | 创建时间 | Calendar
+| id | PK | integer(int64)
+| isConfirmed | 是否已发送接收到确认回执 | boolean
+| jsonData | 额外规定的数据 | jsonObject
+| lastConfirmTime | 最近一次的接收到确认回执的时间 | Calendar
+| lastSendTime | 最近一次下发（被请求）时间 | Calendar
+| type 通知类型 string
+|===

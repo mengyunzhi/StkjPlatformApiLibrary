@@ -1,0 +1,26 @@
+=== MandatoryInstrumentCheckApply强检器具检定申请
+|===
+| 字段名 | 描述 | 类型
+| acceptedTerminalType | 受理的终端类型。 0 web(default); 1 cs; 2 app | string(byte)
+| agree | 是否同意 | boolean
+| applyTime | 申请时间 | Calendar
+| auditingDepartment | 当前审核部门 | Department (部门)
+| auditingUser | 当前受理人 | User (用户)
+| checkDepartment | 检定部门(检定技术机构)。如果本区域内有检定能力，则检定部门与审核部门为同一部门 | Department (部门)
+| checkPlace | 检定场所 | string
+| createTime | 创建时间 | Calendar
+| createUserMobile | 创建人联系方式 | string
+| createUserName | 创建人姓名 | string
+| department | 申请部门 | Department (部门)
+| done | 是否已办结 | boolean
+| id | PK | integer(int64)
+| instrumentCheckInfoList | 器具检定信息 |  < InstrumentCheckInfo (强制检定器具检定信息) > array
+| lastModifiedTime | 最后修改时间 | Calendar
+| mandatoryInstrumentSet | *即将删除，请勿使用* 强检器具使用信息(废弃) | < MandatoryInstrument 强检器具 > array
+| name | 申请名称 | string
+| notAcceptedReason | 不受理的原因 | string
+| plannedCheckDate | 计划检定日期 | string(date)
+| remarks | 备注 | string
+| replyRemarks | 回复备注 | string
+| status | 受理状态：0，未受理(default)；1 已受理；-1 不受理 | string(byte)
+|===

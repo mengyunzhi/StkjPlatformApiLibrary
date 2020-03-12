@@ -1,0 +1,2 @@
+== 器具别名接口
+include::save.adoc[]
