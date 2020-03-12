@@ -1,136 +1,16 @@
 == 实体与字段
 所有Calendar类型的返回值，均为时间戳。
 
-=== acceptedStatus受理状态
-|===
-| 值 | 描述
-| -2 | 不检
-| -1 | 退检
-| 0 | 未受理
-| 1 | 未检
-| 2 | 检毕
-|===
-
-=== acceptedTerminalType受理终端分类
-|===
-| 值 | 描述
-| 0 | web(默认值)
-| 1 | 检定软件
-| 2 | 手机APP
-|===
-
-
+include::acceptedStatus.adoc[]
 include::accuracy.adoc[]
-
-=== checkResult检定结果
-|===
-| ID | 描述
-| 1 | 不合格
-| 8 | 不合格 -- 不出证
-| 2 | 合格
-| 4 | 合格 -- 铅封
-| 5 | 合格 -- 合格证
-| 3 | 合格 -- 一次合格
-| 6 | 合格 -- 一次合格 -- 铅封
-| 7 | 合格 -- 一次合格 -- 合格证
-|===
-
-=== Department部门
-|===
-| 字段名 | 描述 | 类型
-| address | 地址 | string
-| district | 关联区域 | District (区域)
-| id | PK | integer(int64)
-| name | 名称 | string
-| phone | 联系电话 | string
-| status | 状态 | boolean
-|===
-
+include::acceptedTerminalType.adoc[]
+include::checkResult.adoc[]
+include::department.adoc[]
 include::entityRevision.adoc[]
-
-=== InstrumentCheckInfo强制检定器具检定信息
-|===
-| 字段名 | 描述 | 类型
-| acceptedStatus | -2 不检， -1 退检, 0 未受理， 1 未检, 2 检毕 | string(byte)
-| backedReason  | 退检或不检原因  | string
-| certificateNum | 证书编号 | string
-| certificateStatus | 证书状态 | CertificateStatus (证书状态)
-| checkDate | 检定日期 | string(date)
-| checkDepartment | 检定机构 | Department (部门)
-| checkResult | 检定结果 | CheckResult (检定结果)
-| checkYear | 年度 | integer(int32)
-| cost | 应收费用 单位:分 | integer(int64)
-| id | PK | integer(int64)
-| inspectorQualifier | 关联人员资质(检定员) -- 尚未启用 | Qualifier (人员)
-| instrumentCertificateType | 证书类型 | InstrumentCertificateType (器具证书类型)
-| mandatoryInstrument | 强检器具 | <<MandatoryInstrument强检器具>>
-| mandatoryInstrumentCheckApply | 检定申请。每次检定前，必须先提出检定申请。所以检定记录，必然对应检定申请 | <<MandatoryInstrumentCheckApply强检器具检定申请>>
-| remarks| 备注 | string
-| validityDate | 有效期至 | string(date)
-|===
-
-=== InsturmentType强检器具类别
-|===
-| 字段名 | 描述 | 类型
-| id | 主键 | int64
-| name | 名称 | string
-| pinyin | 拼音 | string
-| code | 对应国家平台编码 | string
-| codeName | 对应国家平台名称 | string
-|===
-
-
-=== MandatoryInstrumentCheckApply强检器具检定申请
-|===
-| 字段名 | 描述 | 类型
-| acceptedTerminalType | 受理的终端类型。 0 web(default); 1 cs; 2 app | string(byte)
-| agree | 是否同意 | boolean
-| applyTime | 申请时间 | Calendar
-| auditingDepartment | 当前审核部门 | Department (部门)
-| auditingUser | 当前受理人 | User (用户)
-| checkDepartment | 检定部门(检定技术机构)。如果本区域内有检定能力，则检定部门与审核部门为同一部门 | Department (部门)
-| checkPlace | 检定场所 | string
-| createTime | 创建时间 | Calendar
-| createUserMobile | 创建人联系方式 | string
-| createUserName | 创建人姓名 | string
-| department | 申请部门 | Department (部门)
-| done | 是否已办结 | boolean
-| id | PK | integer(int64)
-| instrumentCheckInfoList | 器具检定信息 |  < InstrumentCheckInfo (强制检定器具检定信息) > array
-| lastModifiedTime | 最后修改时间 | Calendar
-| mandatoryInstrumentSet | *即将删除，请勿使用* 强检器具使用信息(废弃) | < MandatoryInstrument 强检器具 > array
-| name | 申请名称 | string
-| notAcceptedReason | 不受理的原因 | string
-| plannedCheckDate | 计划检定日期 | string(date)
-| remarks | 备注 | string
-| replyRemarks | 回复备注 | string
-| status | 受理状态：0，未受理(default)；1 已受理；-1 不受理 | string(byte)
-|===
-
-=== Notice通知
-.Notice
-|===
-|字段名 | 描述 | 类型
-| createTime | 创建时间 | Calendar
-| id | PK | integer(int64)
-| isConfirmed | 是否已发送接收到确认回执 | boolean
-| jsonData | 额外规定的数据 | jsonObject
-| lastConfirmTime | 最近一次的接收到确认回执的时间 | Calendar
-| lastSendTime | 最近一次下发（被请求）时间 | Calendar
-| type 通知类型 string
-|===
-
+include::instrumentAlias.adoc[]
+include::instrumentCheckInfo.adoc[]
+include::instrumentType.adoc[]
+include::mandatoryInstrumentCheckApply.adoc[]
+include::notice.adoc[]
 include::revision.adoc[]
-
-=== User登录用户
-|===
-| 字段名 | 描述 | 类型
-| createTime | 创建时间 | Calendar
-| department | 部门 |  Department (部门)
-| id | PK | integer(int64)
-| mobile | 手机号 | string
-| name | 姓名 | string
-| status | 状态:-1未审核; 0已审核；1已冻结；2其它 | integer(int32)
-| username | 用户名 | string
-| | |
-|===
+include::user.adoc[]

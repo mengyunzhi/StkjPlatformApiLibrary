@@ -5,13 +5,13 @@
 |===
 | 字段 | 名称 |  类型  |
 | instrumentType | 器具类别 |  {id: integer(int64)} |
-| name | 名称 | string
+| name | 名称 | string |
 |===
 
 .请求示例
 ```
       HTTP Method = POST
-      Request URI = /api/InstrumentAlias
+      Request URI = /InstrumentAlias
           Headers = [Content-Type:"application/json;charset=UTF-8"]
              Body = {"instrumentType":{"id":"-7428405515380056824"},"name":"hCo6"}
 ```
