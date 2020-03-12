@@ -1,0 +1,8 @@
+=== InstrumentAlias器具别名
+
+|===
+| 字段名 | 描述 | 类型
+| id | PK | integer(int64)
+| name | 别名名称 | string
+| instrumentType | FK 器具类别 | <<InstrumentType器具类别>>
+|===
